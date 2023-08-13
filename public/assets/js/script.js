@@ -12,7 +12,7 @@
  * Get the saved notes to appear on the left side in a column
  * Make the saved notes clickable
  * Make the click event for the saved notes cause the notes to appear on the right hand side
- * 
+ * Create delet button with garbage as icon
  * Major steps
 
  * 

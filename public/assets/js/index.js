@@ -12,6 +12,17 @@ if (window.location.pathname === '/notes') {
   noteList = document.querySelectorAll('.list-container .list-group');
 }
 
+// Handle the "Get Started" button click
+const handleGetStarted = () => {
+  // Navigate to the notes page
+  window.location.href = 'notes.html';
+};
+
+// Add an event listener to the "Get Started" button
+const getStartedBtn = document.getElementById('getStartedBtn');
+getStartedBtn.addEventListener('click', handleGetStarted);
+
+
 // Show an element
 const show = (elem) => {
   elem.style.display = 'inline';

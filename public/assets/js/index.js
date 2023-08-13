@@ -3,6 +3,19 @@ let noteText;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
+const express = require('express');
+const path = require('path');
+const PORT = process.env.PORT || 3000;
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/notes', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'notes.html'));
+});
+
+app.listen(PORT, () => {
+  console.log('Server is running on port ${PORT}');
+});
 
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
@@ -12,15 +25,15 @@ if (window.location.pathname === '/notes') {
   noteList = document.querySelectorAll('.list-container .list-group');
 }
 
-// Handle the "Get Started" button click
-const handleGetStarted = () => {
-  // Navigate to the notes page
-  window.location.href = 'notes.html';
-};
+// // Handle the "Get Started" button click
+// const handleGetStarted = () => {
+//   // Navigate to the notes page
+//   window.location.href = 'notes.html';
+// };
 
-// Add an event listener to the "Get Started" button
-const getStartedBtn = document.getElementById('getStartedBtn');
-getStartedBtn.addEventListener('click', handleGetStarted);
+// // Add an event listener to the "Get Started" button
+// const getStartedBtn = document.getElementById('getStartedBtn');
+// getStartedBtn.addEventListener('click', handleGetStarted);
 
 
 // Show an element

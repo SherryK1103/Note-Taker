@@ -25,17 +25,6 @@ if (window.location.pathname === '/notes') {
   noteList = document.querySelectorAll('.list-container .list-group');
 }
 
-// // Handle the "Get Started" button click
-// const handleGetStarted = () => {
-//   // Navigate to the notes page
-//   window.location.href = 'notes.html';
-// };
-
-// // Add an event listener to the "Get Started" button
-// const getStartedBtn = document.getElementById('getStartedBtn');
-// getStartedBtn.addEventListener('click', handleGetStarted);
-
-
 // Show an element
 const show = (elem) => {
   elem.style.display = 'inline';
@@ -95,10 +84,17 @@ const handleNoteSave = () => {
     title: noteTitle.value,
     text: noteText.value,
   };
-  saveNote(newNote).then(() => {
-    getAndRenderNotes();
-    renderActiveNote();
-  });
+
+  saveToLocalStorage(newNote);
+
+  getAndRenderNotes();
+  renderActiveNote();
+};
+
+const saveToLocalStorage = (note) => {
+  let notes = JSON.parse(localStorage.getItem('notes')) || [];
+  notes.push(note);
+  localStorage.setItem('notes', JSON.stringify(notes));
 };
 
 // Delete the clicked note
@@ -194,8 +190,18 @@ const renderNoteList = async (notes) => {
   }
 };
 
-// Gets notes from the db and renders them to the sidebar
-const getAndRenderNotes = () => getNotes().then(renderNoteList);
+const getAndRenderNotes = () => {
+  // Retrieve notes from local storage
+  const notes = getFromLocalStorage();
+
+  // Render the list of note titles
+  renderNoteList(notes);
+};
+
+const getFromLocalStorage = () => {
+  return JSON.parse(localStorage.getItem('notes')) || [];
+};
+
 
 if (window.location.pathname === '/notes') {
   saveNoteBtn.addEventListener('click', handleNoteSave);
@@ -205,3 +211,5 @@ if (window.location.pathname === '/notes') {
 }
 
 getAndRenderNotes();
+
+

@@ -1,12 +1,12 @@
+const express = require('express');
+const path = require('path');
 const app = express();
+const PORT = process.env.PORT || 3000;
 let noteTitle;
 let noteText;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
-const express = require('express');
-const path = require('path');
-const PORT = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
 

@@ -4,6 +4,16 @@ let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 
+app.post('/api/notes', (req, res) => {
+  const newNote = req.body;
+  newNote.id = generateUniqueId(); 
+  const notes = readNotesFromFile();
+  notes.push(newNote);
+  writeNotesToFile(notes); 
+  res.json(newNote);
+});
+
+
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');

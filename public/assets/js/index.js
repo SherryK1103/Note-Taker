@@ -4,16 +4,6 @@ let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.get('/notes', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'notes.html'));
-});
-
-app.listen(PORT, () => {
-  console.log('Server is running on port ${PORT}');
-});
-
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
@@ -81,17 +71,10 @@ const handleNoteSave = () => {
     title: noteTitle.value,
     text: noteText.value,
   };
-
-  saveToLocalStorage(newNote);
-
-  getAndRenderNotes();
-  renderActiveNote();
-};
-
-const saveToLocalStorage = (note) => {
-  let notes = JSON.parse(localStorage.getItem('notes')) || [];
-  notes.push(note);
-  localStorage.setItem('notes', JSON.stringify(notes));
+  saveNote(newNote).then(() => {
+    getAndRenderNotes();
+    renderActiveNote();
+  });
 };
 
 // Delete the clicked note
@@ -187,18 +170,8 @@ const renderNoteList = async (notes) => {
   }
 };
 
-const getAndRenderNotes = () => {
-  // Retrieve notes from local storage
-  const notes = getFromLocalStorage();
-
-  // Render the list of note titles
-  renderNoteList(notes);
-};
-
-const getFromLocalStorage = () => {
-  return JSON.parse(localStorage.getItem('notes')) || [];
-};
-
+// Gets notes from the db and renders them to the sidebar
+const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
 if (window.location.pathname === '/notes') {
   saveNoteBtn.addEventListener('click', handleNoteSave);
@@ -208,5 +181,3 @@ if (window.location.pathname === '/notes') {
 }
 
 getAndRenderNotes();
-
-

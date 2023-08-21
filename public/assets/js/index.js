@@ -1,3 +1,4 @@
+const app = express();
 let noteTitle;
 let noteText;
 let saveNoteBtn;

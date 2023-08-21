@@ -15,7 +15,7 @@ https://intense-chamber-09330-07a5b76c6b1e.herokuapp.com/
 
 ## Usage
 
-![advanced css portfolio screenshot]()
+![NOTE-TAKER-SC](../Note-Taker-08/Assets/NOTE-TAKER-SC.png)
 
 ## Process Steps
 

@@ -1,4 +1,3 @@
-const PORT = process.env.PORT || 3000;
 let noteTitle;
 let noteText;
 let saveNoteBtn;
